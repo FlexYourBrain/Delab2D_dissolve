@@ -1,0 +1,31 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /main/render/animateshaders.renderc
+
+[display]
+width = 720
+height = 512
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = Delab 2D - Dissolve
+version = 0.1
+
+[graphics]
+max_draw_calls = 156
+max_characters = 256
+max_debug_vertices = 1000
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+
+[html5]
+cssfile = /builtins/manifests/web/dark_theme.css
+scale_mode = stretch
+show_made_with_defold = 0
+show_fullscreen_button = 0
+
+[native_extension]
+app_manifest = /input.appmanifest
+

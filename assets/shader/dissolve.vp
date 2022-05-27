@@ -1,0 +1,19 @@
+//---  Dissolve Shader (wip) by Agustin R  ---//
+uniform highp mat4 view_proj;
+
+attribute highp vec4 position;
+attribute mediump vec2 texcoord0;
+
+varying mediump vec2 var_texcoord0;
+varying mediump vec2 var_texcoord1;
+
+void main()
+{
+    vec2 cord = texcoord0.xy;
+    vec2 offset = vec2(0.0,0.28);
+    vec2 noise = cord + offset;
+
+    gl_Position = view_proj * vec4(position.xyz, 1.0);
+    var_texcoord0 = texcoord0;
+    var_texcoord1 = noise;
+}

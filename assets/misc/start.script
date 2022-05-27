@@ -1,0 +1,51 @@
+local w_go = "/Witch" ; local witch = "/pumkinwitch" ; local w_id = hash("witch") ; local w_sprite = "/pumkinwitch#sprite" ; local d = 0.7
+local frame_id = hash("witch_popup0008")
+
+local function jump(self)
+	if self.can_click then
+		sprite.play_flipbook(witch, w_id) ; sprite.set_hflip(witch, self.dir)
+		local pos = go.get_position(witch);	local gpos = go.get_position(w_go)
+		if self.dir then
+			go.animate(witch, "position.y", go.PLAYBACK_ONCE_PINGPONG, pos.y+130.0, go.EASING_INOUTCUBIC, 1.74, d,function() jump(self,self.dir) end)
+			go.animate(w_go, "position.x", go.PLAYBACK_ONCE_FORWARD, gpos.x+155.0, go.EASING_LINEAR, 1.8 ,0.8)
+			self.dir = not self.dir
+		else
+			go.animate(witch, "position.y", go.PLAYBACK_ONCE_PINGPONG, pos.y+130.0, go.EASING_INOUTCUBIC, 1.74, d,function() jump(self,self.dir) end)
+			go.animate(w_go, "position.x", go.PLAYBACK_ONCE_FORWARD, gpos.x-155.0, go.EASING_LINEAR, 1.8 ,0.8)
+			self.dir = not self.dir
+		end
+	end
+end
+
+function init(self)
+	msg.post("@render:", "clear_color", { color = vmath.vector4(0.09, 0.08, 0.1, 1.0) } )
+	msg.post(".", "acquire_input_focus")
+
+	self.can_click = true
+	self.is_dissolved = false
+	self.dir = false
+
+	jump(self,self.dir)
+end
+
+local function dissolve(self)
+	sprite.play_flipbook(witch, frame_id)
+	local function set_click(self)
+		self.can_click = true
+		jump(self)
+	end
+	if self.is_dissolved then
+		go.animate(w_sprite,"diss", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(0.0,0,0,0), go.EASING_LINEAR, 3.0,0.0,function(self)set_click(self)end)
+		self.is_dissolved = false
+	else
+		go.animate(w_sprite,"diss", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(1.0,0,0,0), go.EASING_LINEAR, 3.0,0.0,function(self)set_click(self)end)
+		self.is_dissolved = true
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed and self.can_click then
+		self.can_click = false
+		dissolve(self)
+	end
+end
