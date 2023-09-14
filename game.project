@@ -5,6 +5,7 @@ render = /main/render/animateshaders.renderc
 [display]
 width = 720
 height = 512
+high_dpi = 1
 
 [android]
 input_method = HiddenInputField
@@ -28,4 +29,7 @@ show_fullscreen_button = 0
 
 [native_extension]
 app_manifest = /input.appmanifest
+
+[script]
+shared_state = 1
 
