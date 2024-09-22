@@ -9,3 +9,8 @@ This sample project showcases a dissolving effect shader made with Defold. Creat
 
 ( Click the image above to check out the shader in action on itch.io )
 
+----
+
+Note: another dissolve shader for defold can be found here
+[dissolve-fx](https://github.com/indiesoftby/defold-dissolve-fx)
+

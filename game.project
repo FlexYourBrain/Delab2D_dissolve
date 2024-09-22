@@ -27,9 +27,6 @@ scale_mode = stretch
 show_made_with_defold = 0
 show_fullscreen_button = 0
 
-[native_extension]
-app_manifest = /input.appmanifest
-
 [script]
 shared_state = 1
 
